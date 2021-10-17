@@ -1,10 +1,10 @@
 console.clear();
-console.log("Contador de letras desde consola");
+console.log("Iniciando analizador de frases...");
 console.log("desde aquí se detallará todo el proceso...");
 
 function obtenerFrase (){
     console.log("Primero solicitamos através de un prompt una frase al usuarío.");
-    let frase = prompt("Dame una frase y te dire el número total de caracteres");
+    let frase = prompt("Dame una frase y analizaré, el número de caracteres, número de palabras, si es palíndromo, etc.");
     console.log("Al pedirlo por prompt nos devuelve un string");
     console.log("Esta es la verificación: "+typeof frase);
 
