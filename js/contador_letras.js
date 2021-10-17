@@ -31,25 +31,33 @@ function obtenerFrase (){
             let totalPalabras =arrayFrase.length
             console.log("Mostramos un alert con el total de las palabras en este caso es de "+ totalPalabras);
             alert('Para la frase "'+frase+'", el total de las palabras es de '+ totalPalabras+'.');
-//          let sinA = frase.match(/a/gi).length;
             let sinA = totalCaracteres-(frase.replace(/a/gi,"").length);
             console.log(`La letra A o a aparece ${sinA} veces`);
             alert(`La letra A o a aparece ${sinA} veces`);
-
-
             let arrayFrasePorLetras = frase.split('')
 
-            let arrayInvertido = arrayFrasePorLetras.reverse();
-            let arrayPalindromo1 = arrayInvertido.toString();
-            let arrayPalindromo = arrayPalindromo1.replace(/,/g,"");
+            const removeAccents = (str) => {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            } 
 
-            if (frase.toLowerCase() == arrayPalindromo.toLowerCase()){
-                console.log("Mostramos un alert con el palindromo de la frase en este caso es: "+ arrayPalindromo+", un palindromo.");
+            let arrayInvertido = arrayFrasePorLetras.reverse();
+            let invertidoSring = arrayInvertido.toString();
+            let invertidoSinComas = invertidoSring.replace(/,/g,"");
+            let invertidoSinAcentos = removeAccents(invertidoSinComas);
+            let invertidoPalindromo = invertidoSinAcentos.replace(/ /g,"");
+
+            let fraseSinAcentos = removeAccents(frase);
+            let fraseSinEspacios = fraseSinAcentos.replace(/ /g,"");
+            console.log(invertidoPalindromo);
+            console.log(fraseSinEspacios);
+
+            if (fraseSinEspacios.toLowerCase() == invertidoPalindromo.toLowerCase()){
+                console.log("Mostramos un alert con el palindromo de la frase en este caso es: "+ invertidoPalindromo+", un palindromo.");
                 alert('La frase "'+frase+'", es un palindromo.');
                 salirFunction();
             } else  {
-                console.log('Mostramos un alert de la frase en este caso es: "'+ arrayPalindromo+'", no es un palindromo. "'+arrayPalindromo+'".');
-                alert(`La frase "${frase}", no es un palindromo. "${arrayPalindromo}".`);
+                console.log('Mostramos un alert de la frase en este caso es: "'+ invertidoPalindromo+'", no es un palindromo.');
+                alert(`La frase "${frase}", no es un palindromo. "${invertidoPalindromo}".`);
                 salirFunction();
             }
 
@@ -68,6 +76,3 @@ function obtenerFrase (){
 setTimeout(() => {
     obtenerFrase ();
 }, 3000);
-
-
-
